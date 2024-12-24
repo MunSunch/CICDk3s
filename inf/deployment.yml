@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cicdk3s-deploy
+  namespace: spring
 spec:
   selector:
     matchLabels:

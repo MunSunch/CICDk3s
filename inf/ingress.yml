@@ -2,12 +2,13 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: cicdk3s-ingress
+  namespace: spring
   labels:
     name: cicdk3s-ingress
 spec:
   ingressClassName: nginx
   rules:
-  - host: service.advice
+  - host: service-advice.ru
     http:
       paths:
       - pathType: Prefix
