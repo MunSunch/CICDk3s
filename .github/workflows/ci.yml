@@ -41,8 +41,5 @@ jobs:
       - name: Build image
         run: |
           docker buildx create --use 
-          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_LOGIN }}/${{ env.PROJECT }}:$VERSION .
+          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_LOGIN }}/${{ env.PROJECT }}:$VERSION --push .
         working-directory: ${{ env.DIRECTORY }}/${{ env.PROJECT }}
-      
-      - name: Send to dockerhub registry
-        run: docker push ${{ secrets.DOCKER_LOGIN }}/${{ env.PROJECT }}:$VERSION --all-tags
