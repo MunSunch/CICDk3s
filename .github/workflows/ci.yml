@@ -39,8 +39,8 @@ jobs:
         working-directory: ${{ env.DIRECTORY }}
 
       - name: Build image
-        run: docker build -t ${{ secrets.DOCKER_LOGIN }}/${{ env.PROJECT }}:$VERSION .
+        run: docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_LOGIN }}/${{ env.PROJECT }}:$VERSION .
         working-directory: ${{ env.DIRECTORY }}/${{ env.PROJECT }}
       
       - name: Send to dockerhub registry
-        run: docker push ${{ secrets.DOCKER_LOGIN }}/${{ env.PROJECT }}:$VERSION
+        run: docker push ${{ secrets.DOCKER_LOGIN }}/${{ env.PROJECT }}:$VERSION --all-tags
