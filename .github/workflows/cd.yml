@@ -12,17 +12,18 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-       steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
       - name: Set up kubectl
-        uses: azure/setup-kubectl@v2
+        uses: azure/setup-kubectl@v4.0.0
         with:
           version: 'v1.29.1'
 
-      - name: Deploy to K3s
-        env:
-          KUBECONFIG: ${{ secrets.KUBECONFIG }}
+      - name: Create kubeconfig file
         run: |
-          kubectl apply -f inf/
+          echo "${{ secrets.KUBE_CONFIG }}" > /tmp/kubeconfig
+
+      - name: Deploy to K3s
+        run: |
+          kubectl --kubeconfig /tmp/kubeconfig apply -f inf/
