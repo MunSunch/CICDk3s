@@ -25,8 +25,14 @@ jobs:
           distribution: 'liberica'
           java-version: '21'
 
+      - name: DockerHub Authenticate
+        uses: docker/login-action@v3.3.0
+        with:
+          username: ${{ secrets.DOCKER_LOGIN }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+
       - name: Build image
-        run: docker build -t ${{ secrets.DOCKER_LOGIN }}/${{ env.PROJECT }}:$VERSION -t ${{ secrets.DOCKER_LOGIN }}/${{ env.PROJECT }}:RELEASE_VERSION.
+        run: docker build -t ${{ secrets.DOCKER_LOGIN }}/${{ env.PROJECT }}:$VERSION -t ${{ secrets.DOCKER_LOGIN }}/${{ env.PROJECT }}:RELEASE_VERSION .
         working-directory: ${{ env.DIRECTORY }}/${{ env.PROJECT }}
 
       - name: Extract project version for docker image
