@@ -21,5 +21,7 @@ jobs:
           version: 'v1.29.1'
 
       - name: Deploy to K3s
+        env:
+          kubeconfig: ${{ secrets.KUBE_CONFIG }}
         run: |
-          kubectl --kubeconfig ${{ secrets.KUBE_CONFIG }} apply -f inf/
+          kubectl --kubeconfig ${{ env.kubeconfig }} apply -f inf/
