@@ -1,7 +1,7 @@
-FROM bellsoft/liberica-openjre-alpine:23.0.1 AS builder
+FROM bellsoft/liberica-openjdk-alpine:23.0.1 AS builder
 WORKDIR /application
 COPY . .
-RUN --mount=type=cache,target=/root/.m2  chmod +x mvnw && ./mvnw clean install -Dmaven.test.skip
+RUN --mount=type=cache,target=/root/.m2  chmod +x mvnw && ./mvnw clean install -Dmaven.test.skip -X
 
 FROM bellsoft/liberica-openjre-debian:23.0.1 AS layers
 WORKDIR /application
