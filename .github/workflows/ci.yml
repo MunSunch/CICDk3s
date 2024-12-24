@@ -43,4 +43,4 @@ jobs:
         working-directory: ${{ env.DIRECTORY }}/${{ env.PROJECT }}
       
       - name: Send to dockerhub registry
-        run: docker push ${{ secrets.DOCKER_LOGIN }}/${{ env.PROJECT }}:$VERSION --all-tags
+        run: docker push ${{ secrets.DOCKER_LOGIN }}/${{ env.PROJECT }}:$VERSION
