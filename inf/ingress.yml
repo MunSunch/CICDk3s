@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cicdk3s-ingress
+  labels:
+    name: cicdk3s-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: service.advice
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: cicdk3s-service
+            port: 
+              number: 8080
