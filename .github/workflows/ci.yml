@@ -19,7 +19,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up to JDK 17
+      - name: Set up to JDK 21
         uses: actions/setup-java@v4
         with:
           distribution: 'liberica'
@@ -39,8 +39,7 @@ jobs:
         working-directory: ${{ env.DIRECTORY }}
 
       - name: Build image
-        run: docker build -t ${{ secrets.DOCKER_LOGIN }}/${{ env.PROJECT }}:$VERSION .
+        run: |
+          docker buildx create --use 
+          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_LOGIN }}/${{ env.PROJECT }}:$VERSION -t ${{ secrets.DOCKER_LOGIN }}/${{ env.PROJECT }}:latest --push .
         working-directory: ${{ env.DIRECTORY }}/${{ env.PROJECT }}
-      
-      - name: Send to dockerhub registry
-        run: docker push ${{ secrets.DOCKER_LOGIN }}/${{ env.PROJECT }}:$VERSION

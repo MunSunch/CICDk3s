@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cicdk3s-deploy
+spec:
+  selector:
+    matchLabels:
+      app: cicdk3s-deploy
+  template:
+    metadata:
+      labels:
+        app: cicdk3s-deploy
+    spec:
+      containers:
+      - name: cicdk3s-deploy
+        image: munirsunchalyaev/cicdk3s:latest
+        resources:
+          limits:
+            memory: "500Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+      nodeSelector:
+        kubernetes.io/arch: arm64
