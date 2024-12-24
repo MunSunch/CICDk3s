@@ -3,8 +3,6 @@ kind: Ingress
 metadata:
   name: cicdk3s-ingress
   namespace: spring
-  labels:
-    name: cicdk3s-ingress
 spec:
   ingressClassName: nginx
   rules:
@@ -12,7 +10,7 @@ spec:
     http:
       paths:
       - pathType: Prefix
-        path: "/"
+        path: /
         backend:
           service:
             name: cicdk3s-service
