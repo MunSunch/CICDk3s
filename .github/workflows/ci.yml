@@ -31,16 +31,16 @@ jobs:
           username: ${{ secrets.DOCKER_LOGIN }}
           password: ${{ secrets.DOCKER_TOKEN }}
 
-      - name: Build image
-        run: docker build -t ${{ secrets.DOCKER_LOGIN }}/${{ env.PROJECT }}:$VERSION -t ${{ secrets.DOCKER_LOGIN }}/${{ env.PROJECT }}:RELEASE_VERSION .
-        working-directory: ${{ env.DIRECTORY }}/${{ env.PROJECT }}
-
       - name: Extract project version for docker image
         run: |
           VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
           RELEASE_VERSION=$(echo $VERSION | sed 's/-SNAPSHOT//')
           echo "VERSION=$RELEASE_VERSION" >> $GITHUB_ENV
         working-directory: ${{ env.DIRECTORY }}
+
+      - name: Build image
+        run: docker build -t ${{ secrets.DOCKER_LOGIN }}/${{ env.PROJECT }}:$VERSION .
+        working-directory: ${{ env.DIRECTORY }}/${{ env.PROJECT }}
       
       - name: Send to dockerhub registry
         run: docker push ${{ secrets.DOCKER_LOGIN }}/${{ env.PROJECT }}:$VERSION --all-tags
