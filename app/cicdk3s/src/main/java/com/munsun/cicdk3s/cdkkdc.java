@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class cdkkdc {
-    @GetMapping(value = "/", produces = "text/html")
+    @GetMapping("/")
     public String hello() {
-        return "redirect:/index.html";
+        return "index";
     }
 }
 
