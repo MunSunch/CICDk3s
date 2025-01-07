@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import java.util.List;
 import java.util.Map;
 
-@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class cdkkdc {
@@ -31,7 +30,6 @@ public class cdkkdc {
     @PostMapping(value = "/schedule", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public void schedule(@RequestBody List<ScheduleDay> schedule) {
-        log.info(schedule.toString());
         repository.save(schedule);
     }
 }
