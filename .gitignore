@@ -1,0 +1,7 @@
+./idea
+./target
+./out
+./.idea/
+target/
+*.DS_Store
+.DS_Store
