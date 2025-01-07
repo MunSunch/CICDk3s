@@ -1,14 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
     <h1 style="text-align: center">Hello World</h1>
-    <div style="margin: 0 auto; text-align: center">
-        <img src="https://i.pinimg.com/originals/ba/bd/6d/babd6d37eb2dd965c7f1dfb516d54094.jpg"
-        style="width: 50%; height: 50%">
+    <div th:if="${not #lists.isEmpty(schedule)}" style="margin: 0 auto">
+        <table>
+            <thead>
+                <tr>
+                    <th>Дата</th>
+                    <th>Тип</th>
+                    <th>Наименование</th>
+                    <th>Преподаватель</th>
+                    <th>Метоположение</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="day : ${schedule}">
+                    <td th:text="${day.date}"></td>
+                    <td th:text="${day.type}"></td>
+                    <td th:text="${day.subject}"></td>
+                    <td th:text="${day.teacher}"></td>
+                    <td th:text="${day.location}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div th:if="${#lists.isEmpty(schedule)}" style="text-align: center">
+        <p>No events scheduled.</p>
     </div>
 </body>
 </html>
